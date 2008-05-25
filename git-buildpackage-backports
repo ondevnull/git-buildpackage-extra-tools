@@ -1,0 +1,6 @@
+#!/bin/sh
+
+git-buildpackage \
+		--git-upstream-branch=upstream-backports \
+		--git-debian-branch=master-backports \
+		$1

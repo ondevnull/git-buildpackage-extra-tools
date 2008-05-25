@@ -1,4 +1,14 @@
 This are just a few bash binaries for easying my tasks while building debian
-packages with git.
+packages with git while using this structure:
+
+* experimental
+ * upstream-experimental
+ * master-experimental
+* unstable
+ * upstream
+ * master
+* backports
+ * upstream-backports
+ * master-backports
 
 There's included too the gbp.conf file that I use to complete the building using pdebuild instead of debuild (for sanity check).

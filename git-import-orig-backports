@@ -1,0 +1,6 @@
+#!/bin/sh
+
+git-import-orig \
+		--upstream-branch=upstream-backports \
+		--debian-branch=master-backports \
+		$1

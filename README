@@ -1,2 +1,4 @@
 This are just a few bash binaries for easying my tasks while building debian
-packages with git
+packages with git.
+
+There's included too the gbp.conf file that I use to complete the building using pdebuild instead of debuild (for sanity check).

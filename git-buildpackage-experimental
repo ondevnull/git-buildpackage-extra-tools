@@ -1,0 +1,6 @@
+#!/bin/sh
+
+git-buildpackage \
+		--git-upstream-branch=upstream-experimental \
+		--git-debian-branch=master-experimental \
+		$1

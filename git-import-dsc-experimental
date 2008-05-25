@@ -1,0 +1,6 @@
+#!/bin/sh
+
+git-import-dsc \
+		--upstream-branch=upstream-experimental \
+		--debian-branch=master-experimental \
+		$1

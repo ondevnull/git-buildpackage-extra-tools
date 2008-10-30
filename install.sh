@@ -26,7 +26,7 @@
  * THE SOFTWARE.
  */
  
-if [[ $1 = "-h" ]]; then
+if [[ $0 = "-h" ]]; then
 	echo
 	echo "This is the installer for git-buildpackage-extra-tools,"
 	echo "just run it with ./install.sh and will install a symlink"
@@ -36,7 +36,7 @@ if [[ $1 = "-h" ]]; then
 	echo "git://git.rivco.info/misc/git-buildpackage-extra-tools.git"
 fi
 
-if [[ $1 = "-v" ]]; then
+if [[ $0 = "-v" ]]; then
 	echo 
 	echo "Installer for git-buildpackage-extra-tools"
 	echo "Version 0.01"

@@ -25,28 +25,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
- 
-if [[ $0 = "-h" ]]; then
-	echo
-	echo "This is the installer for git-buildpackage-extra-tools,"
-	echo "just run it with ./install.sh and will install a symlink"
-	echo "in ~/bin/ of the packages and ~/.gbp.conf from ./gbp.conf."
-	echo
-	echo "Last version downloadable from:"
-	echo "git://git.rivco.info/misc/git-buildpackage-extra-tools.git"
-fi
 
-if [[ $0 = "-v" ]]; then
-	echo 
-	echo "Installer for git-buildpackage-extra-tools"
-	echo "Version 0.01"
-	echo "Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>"
-fi
+help="
+This is the installer for git-buildpackage-extra-tools,
+just run it with ./install.sh and will install a symlink
+in ~/bin/ of the packages and ~/.gbp.conf from ./gbp.conf.
 
-if [[ $# = 0 ]]; then
-	echo
+Options:
+-v		Print version of this installer.
+-h		Print this help.
+-i		Installs the symlinks.
+
+Last version downloadable from:
+git://git.rivco.info/misc/git-buildpackage-extra-tools.git
+"
+
+version="
+Installer for git-buildpackage-extra-tools.
+Version 0.01
+Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>
+"
+
+installer() {
 	echo "Checking if ~/bin is created"
-	if [[ -d ! ~/bin ]]; then
+	if [ -e ! $HOME/bin ]; then
 		mkdir ~/bin
 		echo "Created ~/bin..."
 	else
@@ -61,7 +63,29 @@ if [[ $# = 0 ]]; then
 	echo "Symlinking gbp.conf..."
 	ln -s gbp.conf ~/.gbp.conf
 	echo 
-	echo "Dude! You\'re done!"
-fi
+	echo "Dude! You're done!"
+}
 
-exit 0
+uninstaller() {
+	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental
+	do
+		echo "Deleting $i..."
+		rm ~/bin/$i
+	done
+	echo "Deleting ~/.gbp.conf..."
+	rm ~/.gbp.conf
+	echo "Uninstalled!"
+}
+
+while test -n "$1"; do
+	case $1 in
+	-v)	echo "$version"; exit 0;;
+	-i)	installer; exit 0;;
+	-u)	uninstaller; exit 0;;
+	*)	echo "$help"; exit 0;;
+	esac
+done
+
+if test -z $1; then
+	echo "$help"; exit 0
+fi

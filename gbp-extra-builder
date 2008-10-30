@@ -60,6 +60,11 @@ signpackages() {
 	debsign -kcacab118 ../$(grep -m 1 ';' debian/changelog | sed 's/ .*//')_$(grep -m 1 ';' debian/changelog | sed 's/.*(//' | sed 's/).*//')_*.changes
 }
 
+checklintian() {
+	lintian -i ../b-a/$(grep -m 1 ';' debian/changelog | sed 's/ .*//')_$(grep -m 1 ';' debian/changelog | sed 's/.*(//' | sed 's/).*//')_*.changes
+	echo "There's $(lintian ../b-a/$(grep -m 1 ';' debian/changelog | sed 's/ .*//')_$(grep -m 1 ';' debian/changelog | sed 's/.*(//' | sed 's/).*//')_*.changes | wc -l) lintian warnings."
+}
+
 #main part of the script
 
 while test -n "$1"; do
@@ -68,6 +73,7 @@ while test -n "$1"; do
 	-b)	checkbadir
 		callpdebuild
 		signpackages
+		checklintian
 		exit 0;;
 	*)	echo "$help"; exit 0;;
 	esac

@@ -55,7 +55,7 @@ installer() {
 		echo "~/bin exists! :D"
 	fi
 	echo "Starting to copy the files"
-	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental builder
+	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental gbp-extra-builder
 	do
 		echo "Copying $i..."
 		cp ./$i ~/bin/$i
@@ -67,7 +67,7 @@ installer() {
 }
 
 uninstaller() {
-	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental builder
+	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental gbp-extra-builder
 	do
 		echo "Deleting $i..."
 		rm ~/bin/$i

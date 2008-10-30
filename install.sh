@@ -58,10 +58,10 @@ installer() {
 	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental
 	do
 		echo "Symlinking $i..."
-		ln -s $i ~/bin/$i
+		cp ./$i ~/bin/$i
 	done
 	echo "Symlinking gbp.conf..."
-	ln -s gbp.conf ~/.gbp.conf
+	cp ./gbp.conf ~/.gbp.conf
 	echo 
 	echo "Dude! You're done!"
 }

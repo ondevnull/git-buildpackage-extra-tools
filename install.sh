@@ -48,7 +48,7 @@ Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>
 
 installer() {
 	echo "Checking if ~/bin is created"
-	if [ -e ! $HOME/bin ]; then
+	if [ ! -e $HOME/bin ]; then
 		mkdir ~/bin
 		echo "Created ~/bin..."
 	else

@@ -47,19 +47,13 @@ Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>
 "
 
 checkbadir() {
-	if test -e ! ../b-a; then
+	if test ! -e ../b-a; then
 		mkdir ../b-a
 	fi
 }
 
 callpdebuild() {
-	pdebuild --pbuilder cowbuilder \
-		--build-result ../b-a \
-		--debsign-k CACAB118 \
-		--auto-debsign \
-		--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' \
-		-- \
-		--basepath ${BSPATH}
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' -- --basepath ${BSPATH}
 }
 
 signpackages() {

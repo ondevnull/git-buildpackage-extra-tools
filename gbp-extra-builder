@@ -2,8 +2,8 @@
 
 #
 # Author: Jose Luis Rivas <ghostbar at gmx.com>
-# Filename: install.sh
-# Date: October 29, 2008, 21:40.
+# Filename: builder
+# Date: October 30, 2008, 02:06.
 #
 # Copyright (c) 2008 Jose Luis Rivas <ghostbar at gmx.com>
 #
@@ -27,61 +27,54 @@
 #
 
 help="
-This is the installer for git-buildpackage-extra-tools,
-just run it with ./install.sh and will install a copy
-in ~/bin/ of the binaries and ~/.gbp.conf from ./gbp.conf.
+This is a script helping git-bp-tools-extra with build
+options.
 
 Options:
--v		Print version of this installer.
+-v		Print version.
 -h		Print this help.
--i		Installs the binaries.
+-b		Builds.
+
 
 Last version downloadable from:
 git://git.rivco.info/misc/git-buildpackage-extra-tools.git
 "
 
 version="
-Installer for git-buildpackage-extra-tools.
-Version 0.01
+Helper script for building packages with git-bp-tools-extra
+Version: 0.01
 Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>
 "
 
-installer() {
-	echo "Checking if ~/bin is created"
-	if [ -e ! $HOME/bin ]; then
-		mkdir ~/bin
-		echo "Created ~/bin..."
-	else
-		echo "~/bin exists! :D"
+checkbadir() {
+	if test -e ! ../b-a; then
+		mkdir ../b-a
 	fi
-	echo "Starting to copy the files"
-	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental builder
-	do
-		echo "Copying $i..."
-		cp ./$i ~/bin/$i
-	done
-	echo "Copying gbp.conf..."
-	cp ./gbp.conf ~/.gbp.conf
-	echo 
-	echo "Dude! You're done!"
 }
 
-uninstaller() {
-	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental builder
-	do
-		echo "Deleting $i..."
-		rm ~/bin/$i
-	done
-	echo "Deleting ~/.gbp.conf..."
-	rm ~/.gbp.conf
-	echo "Uninstalled!"
+callpdebuild() {
+	pdebuild --pbuilder cowbuilder \
+		--build-result ../b-a \
+		--debsign-k CACAB118 \
+		--auto-debsign \
+		--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' \
+		-- \
+		--basepath ${BSPATH}
 }
+
+signpackages() {
+	debsign -kcacab118 ../$(grep -m 1 ';' debian/changelog | sed 's/ .*//')_$(grep -m 1 ';' debian/changelog | sed 's/.*(//' | sed 's/).*//')_*.changes
+}
+
+#main part of the script
 
 while test -n "$1"; do
 	case $1 in
 	-v)	echo "$version"; exit 0;;
-	-i)	installer; exit 0;;
-	-u)	uninstaller; exit 0;;
+	-b)	checkbadir
+		callpdebuild
+		signpackages
+		exit 0;;
 	*)	echo "$help"; exit 0;;
 	esac
 done

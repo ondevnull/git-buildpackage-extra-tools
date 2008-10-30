@@ -12,3 +12,11 @@ packages with git while using this structure:
  * master-backports
 
 There's included too the gbp.conf file that I use to complete the building using pdebuild instead of debuild (for sanity check).
+
+INSTALLING
+==============
+
+Just run ./install.sh, that script will make symlinks from this directory
+to ~/bin and will symlink gbp.conf in ~/.gbp.conf as well.
+
+Not real installing since is yet pre-alpha.

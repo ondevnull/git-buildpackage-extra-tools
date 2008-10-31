@@ -34,6 +34,7 @@ Options:
 -v		Print version.
 -h		Print this help.
 -b		Builds.
+-lintian, -l	Only checks lintian
 
 
 Last version downloadable from:
@@ -75,6 +76,9 @@ while test -n "$1"; do
 		signpackages
 		checklintian
 		exit 0;;
+	-lintian)
+		checklintian > ../lintian; exit 0;;
+	-l)	checklintian > ../lintian; exit 0;;
 	*)	echo "$help"; exit 0;;
 	esac
 done

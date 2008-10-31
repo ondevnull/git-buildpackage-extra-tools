@@ -31,10 +31,10 @@ This is a script helping git-bp-tools-extra with build
 options.
 
 Options:
--v		Print version.
--h		Print this help.
--b		Builds.
--lintian, -l	Only checks lintian
+-v/--version			Print version.
+-h/--help			Print this help.
+-b				Builds.
+-l/--lintian			Only checks lintian
 
 
 Last version downloadable from:
@@ -70,16 +70,18 @@ checklintian() {
 
 while test -n "$1"; do
 	case $1 in
-	-v)	echo "$version"; exit 0;;
-	-b)	checkbadir
+	+(-v|--version)	
+		echo "$version"; exit 0;;
+	-b)	
+		checkbadir
 		callpdebuild
 		signpackages
 		checklintian
 		exit 0;;
-	-lintian)
+	+(-l|--lintian)
 		checklintian > ../lintian; exit 0;;
-	-l)	checklintian > ../lintian; exit 0;;
-	*)	echo "$help"; exit 0;;
+	*)	
+		echo "$help"; exit 0;;
 	esac
 done
 

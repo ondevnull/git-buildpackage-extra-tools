@@ -31,10 +31,11 @@ This is a script helping git-bp-tools-extra with build
 options.
 
 Options:
--v/--version			Print version.
--h/--help			Print this help.
--b				Builds.
--l/--lintian			Only checks lintian
+-v/--version		Print version.
+-h/--help		Print this help.
+-b			Builds.
+-l/--lintian		Only checks lintian and saves
+			output in ../lintian
 
 
 Last version downloadable from:

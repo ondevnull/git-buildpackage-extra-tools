@@ -70,7 +70,7 @@ checklintian() {
 
 while test -n "$1"; do
 	case $1 in
-	+(-v|--version)	
+	-v|--version)	
 		echo "$version"; exit 0;;
 	-b)	
 		checkbadir
@@ -78,7 +78,7 @@ while test -n "$1"; do
 		signpackages
 		checklintian
 		exit 0;;
-	+(-l|--lintian)
+	-l|--lintian)
 		checklintian > ../lintian; exit 0;;
 	*)	
 		echo "$help"; exit 0;;

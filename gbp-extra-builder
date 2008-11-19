@@ -58,6 +58,10 @@ callpdebuild() {
 	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' -- --basepath ${BSPATH}
 }
 
+callpdebuildexp() {
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' -- --basepath ${BSPATHEXP}
+}
+
 signpackages() {
 	debsign -kcacab118 ../$(grep -m 1 ';' debian/changelog | sed 's/ .*//')_$(grep -m 1 ';' debian/changelog | sed 's/.*(//' | sed 's/).*//')_*.changes
 }
@@ -76,6 +80,12 @@ while test -n "$1"; do
 	-b)	
 		checkbadir
 		callpdebuild
+		signpackages
+		checklintian
+		exit 0;;
+	-be)
+		checkbadir
+		callpdebuildexp
 		signpackages
 		checklintian
 		exit 0;;

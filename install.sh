@@ -46,6 +46,14 @@ Version 0.01
 Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>
 "
 
+binlists="git-buildpackage-backports
+git-import-orig-backports
+git-import-dsc-backports
+git-buildpackage-experimental
+git-import-orig-experimental
+git-import-dsc-experimental
+gbp-extra-builder"
+
 installer() {
 	echo "Checking if ~/bin is created"
 	if [ ! -e $HOME/bin ]; then
@@ -55,7 +63,7 @@ installer() {
 		echo "~/bin exists! :D"
 	fi
 	echo "Starting to copy the files"
-	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental gbp-extra-builder
+	for i in $binlists
 	do
 		echo "Copying $i..."
 		cp ./$i ~/bin/$i
@@ -67,7 +75,7 @@ installer() {
 }
 
 uninstaller() {
-	for i in git-buildpackage-backports git-import-orig-backports git-import-dsc-backports git-buildpackage-experimental git-import-orig-experimental git-import-dsc-experimental gbp-extra-builder
+	for i in $binlists
 	do
 		echo "Deleting $i..."
 		rm ~/bin/$i

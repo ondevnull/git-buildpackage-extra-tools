@@ -3,5 +3,5 @@
 git-buildpackage \
 		--git-upstream-branch=upstream-experimental \
 		--git-debian-branch=master-experimental \
-		--git-builder="~/bin/gbp-extra-builder -be"
+		--git-builder="~/bin/gbp-extra-builder -be" \
 		$1

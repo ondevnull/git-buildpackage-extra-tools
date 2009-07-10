@@ -1,11 +1,11 @@
 #!/bin/sh
 
 #
-# Author: Jose Luis Rivas <ghostbar at gmx.com>
+# Author: Jose Luis Rivas <joseluis at rivco.net>
 # Filename: builder
 # Date: October 30, 2008, 02:06.
 #
-# Copyright (c) 2008 Jose Luis Rivas <ghostbar at gmx.com>
+# Copyright (c) 2008, 2009 Jose Luis Rivas <joseluis at rivco.net>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -39,13 +39,13 @@ Options:
 
 
 Last version downloadable from:
-git://git.rivco.info/misc/git-buildpackage-extra-tools.git
+http://scm.rivco.net/p/git-buildpackage-extra-tools/
 "
 
 version="
 Helper script for building packages with git-bp-tools-extra
 Version: 0.01
-Copyright 2008 Jose Luis Rivas <ghostbar at gmx.com>
+Copyright 2008, 2009 Jose Luis Rivas <joseluis at rivco.net>
 "
 
 checkbadir() {
@@ -55,11 +55,11 @@ checkbadir() {
 }
 
 callpdebuild() {
-	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' -- --basepath ${BSPATH}
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-I.git -i\.git ${EXOP}' -- --basepath ${BSPATH}
 }
 
 callpdebuildexp() {
-	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-v${EXV} -I.git -i\.git ${EXOP}' -- --basepath ${BSPATHEXP}
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-I.git -i\.git ${EXOP}' -- --basepath ${BSPATHEXP}
 }
 
 signpackages() {

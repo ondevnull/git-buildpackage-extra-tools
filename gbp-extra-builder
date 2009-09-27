@@ -55,11 +55,11 @@ checkbadir() {
 }
 
 callpdebuild() {
-	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-I.git -i\.git ${EXOP}' -- --basepath ${BSPATH}
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debbuildopts "-I.git -i\.git ${EXOP}" -- --basepath ${BSPATH}
 }
 
 callpdebuildexp() {
-	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debsign-k CACAB118 --auto-debsign	--debbuildopts '-I.git -i\.git ${EXOP}' -- --basepath ${BSPATHEXP}
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debbuildopts "-I.git -i\.git ${EXOP}" -- --basepath ${BSPATHEXP}
 }
 
 signpackages() {
@@ -80,13 +80,13 @@ while test -n "$1"; do
 	-b)	
 		checkbadir
 		callpdebuild
-		signpackages
+#		signpackages
 		checklintian
 		exit 0;;
 	-be)
 		checkbadir
 		callpdebuildexp
-		signpackages
+#		signpackages
 		checklintian
 		exit 0;;
 	-l|--lintian)

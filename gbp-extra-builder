@@ -66,6 +66,10 @@ callpdebuildtesting() {
 	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debbuildopts "-I.git -i\.git ${EXOP}" -- --basepath ${BSPATHTESTING}
 }
 
+callpdebuildstable() {
+	pdebuild --pbuilder cowbuilder --buildresult ../b-a --debbuildopts "-I.git -i\.git ${EXOP}" -- --basepath ${BSPATHSTABLE}
+}
+
 signpackages() {
 	debsign -kcacab118 ../$(grep -m 1 ';' debian/changelog | sed 's/ .*//')_$(grep -m 1 ';' debian/changelog | sed 's/.*(//' | sed 's/).*//')_*.changes
 }
@@ -94,6 +98,11 @@ while test -n "$1"; do
 	-bt)
 		checkbadir
 		callpdebuildtesting
+		checklintian
+		exit 0;;
+	-bs)
+		checkbadir
+		callpdebuildstable
 		checklintian
 		exit 0;;
 	-l|--lintian)
